@@ -1,39 +1,18 @@
-const mysql = require('mysql2');
+const mongoose = require('mongoose');
 
-/*var mysqlConnection = mysql.createPool({
-    host: "nrs.ccm3xq5r6lrv.us-west-1.rds.amazonaws.com",
-    user: "posadmin",
-    password: "GVwIKnqGYnuMotg1YKQr",
-    database: "Pointofsale",
-    // connectionLimit: 20, // increase the connection limit here
-});*/
+// MongoDB connection URI
+const uri = "mongodb+srv://Dotsnekey:This15%5Epwd@dotsnkeycluster.yybxjxg.mongodb.net/Naik-Associates";
 
-/*var mysqlConnection = mysql.createPool({
-    host: "192.168.29.174",
-    user: "devops",
-    password: "KeNi@0408",
-    database: "Pointofsale",
-    // connectionLimit: 20, // increase the connection limit here
-});*/
-
-var mysqlConnection = mysql.createPool({
-    host: "testing-db-sonarpos.c39oymxcii7e.us-east-1.rds.amazonaws.com",
-    // user: "devops",
-    // password: "Dots@1234",
-    user: "kenimaster",
-    password: "1hTC88limW60BKw4RZ4m",
-    database: "Pointofsale_Quickbook", 
-    // connectionLimit: 20, // increase the connection limit here
+// Connect to MongoDB using Mongoose
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => {
+    console.log('DB connection succeeded.');
+})
+.catch(err => {
+    console.log('DB connection failed \nError:', err);
 });
 
-
-
-
-mysqlConnection.getConnection((err) => {
-    if (!err)
-        console.log('DB connection succeded.');
-    else
-        console.log('DB connection failed \n Error :'); // + JSON.stringify(err, undefined, 2));
-});
-
-module.exports = mysqlConnection;   
+module.exports = mongoose;
